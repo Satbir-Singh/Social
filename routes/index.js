@@ -6,8 +6,8 @@ console.log('router loaded');
 
 router.get('/', homeController.home);
 
-router.get('/signin',homeController.signIn);
-router.get('/signup',homeController.signUp);
+// router.get('/signin',homeController.signIn);
+// router.get('/signup',homeController.signUp);
 
 
 
