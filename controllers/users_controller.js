@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Post = require('../models/post');
 
 
 module.exports.profile = function(req, res){
@@ -59,5 +60,24 @@ module.exports.create = function(req, res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
+    return res.redirect('/users/profile');
+}
+
+
+module.exports.destroySession = function(req,res){
+   //this function is given to req by passport js
+    req.logout();
+    return res.redirect('/');
+}
+
+module.exports.createPost = function(req,res){
+
+    Post.create({content: req.body.content}, function(err, user){
+        if(err){console.log('error in posting message'); return;}
+
+       
+    });
+
+
     return res.redirect('/');
 }

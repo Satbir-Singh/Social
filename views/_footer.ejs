@@ -1,3 +1,29 @@
 <footer>
-    Page Footer
+   <h3>@Codeial Website. All Rights Reserved</h3> 
+
+   <ul>
+    <% if(locals.user) { %>
+
+    <li><a href="/">HOME</a></li>
+    <li>
+        <a href="/users/sign-out">Sign Out</a>
+    </li>
+    
+    
+    <% } else { %>
+
+        <li>
+            <a href="/users/sign-in">Sign In</a>
+        </li>
+
+        <li>
+            <a href="/users/sign-up"> Sign Up</a>
+        </li>
+
+        <% } %>
+
+</ul>
+
+
+
 </footer>

@@ -1,0 +1,21 @@
+footer {
+  display: flex;
+  align-items: flex-start;
+  color: white;
+  background-color: #5454c4;
+}
+
+footer ul {
+  display: flex;
+  flex-direction: column;
+}
+
+footer ul li {
+  margin: 5px;
+  list-style-type: none;
+}
+
+footer ul li a {
+  color: white;
+  text-decoration: none;
+}
