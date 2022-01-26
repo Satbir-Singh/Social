@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const Post = require('../models/post');
+
 
 
 module.exports.profile = function(req, res){
@@ -70,14 +70,3 @@ module.exports.destroySession = function(req,res){
     return res.redirect('/');
 }
 
-module.exports.createPost = function(req,res){
-
-    Post.create({content: req.body.content}, function(err, user){
-        if(err){console.log('error in posting message'); return;}
-
-       
-    });
-
-
-    return res.redirect('/');
-}
