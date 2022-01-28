@@ -3,44 +3,66 @@
 
  //to create comment on the post , first we need to identify in which post user has commented
  // and we pass post id from the form and than check whether post with the incoming post id exist or not
- module.exports.create = function(req,res){
-        Post.findById(req.body.post, function(err, post){
-            if(post){
-                Comment.create({
-                    content: req.body.content,
-                    post: req.body.post,
-                    user: req.user._id
-                }, function(err, comment){
+ module.exports.create = async function(req,res){
 
+    try {
 
-                    // console.log('is this a comment id or a comment object',comment);
-                    // post.comments.push(comment._id); // both are working why dont know
-                    post.comments.push(comment);
-                    post.save();
-
-                    res.redirect('/');
-                });
-            }
-        });
- }
-
-
- module.exports.destroy = function(req, res){
-     Comment.findById(req.params.id, function(err, comment){
-         if(comment.user == req.user.id){
-
-            let postId = comment.post;
-
-            comment.remove();
-
-            Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}}, function(err, post){
-                return res.redirect('back');
+        let post = await Post.findById(req.body.post);
+        if(post){
+            let comment = await Comment.create({
+                content: req.body.content,
+                post: req.body.post,
+                user: req.user._id
             });
 
+                // console.log('is this a comment id or a comment object',comment);
+                // post.comments.push(comment._id); // both are working why dont know
+                post.comments.push(comment);
+                post.save();
 
-         }else{
+                res.redirect('/');
+            
+        }
+        
+    } catch (err) {
 
-            return res.redirect('back');
-         }  
-     });
+        console.log('Error', err);
+        return;
+        
+    }
+
+       
+       
  }
+
+
+ //deleting comment on the post
+ module.exports.destroy = async function(req, res){
+
+    try {
+
+        let comment = await Comment.findById(req.params.id);
+        if(comment.user == req.user.id){
+
+           let postId = comment.post;
+
+           comment.remove();
+
+           let post = await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
+
+           return res.redirect('back');
+           
+       }else{
+
+           return res.redirect('back');
+        }  
+        
+    } catch (err) {
+
+        console.log('Error',err);
+        
+    }
+
+     
+}
+ 

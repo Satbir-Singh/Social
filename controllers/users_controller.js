@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 
-
+//let's keep the same
 module.exports.profile = function(req, res){
 
     User.findById(req.params.id, function(err, user){
@@ -28,7 +28,7 @@ module.exports.update = function(req,res){
             return res.redirect('back');
         });
     }else{
-        return res.redirect(401).send('Unauthorized');
+        return res.status(401).send('Unauthorized');
     }
 }
 
@@ -84,6 +84,7 @@ module.exports.create = function(req, res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
+    req.flash('success', 'Logged in Successfully');
     return res.redirect('/');
 }
 
@@ -91,6 +92,7 @@ module.exports.createSession = function(req, res){
 module.exports.destroySession = function(req,res){
    //this function is given to req by passport js
     req.logout();
+    req.flash('success', 'Logged Out Successfully');
     return res.redirect('/');
 }
 
