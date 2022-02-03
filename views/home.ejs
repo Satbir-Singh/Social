@@ -3,27 +3,27 @@
 <div id="home-container">
 
     <section id= "feed-posts">
-        <h4>Posts</h4>
+            <h4>Posts</h4>
     
-        <form action="/posts/create" id="new-post-form" method="POST">
-            <textarea name="content" id="" cols="30" rows="3" placeholder="Type Here" required></textarea>
-            <input type="submit" value="POST">
-        </form>
-    
-    
-        <div id="posts-list-container">
-    
-    
-            <ul>
-                    <% for(post of posts) { %>
-                    
-                        <%- include('_post') -%>
+            <form action="/posts/create" id="new-post-form" method="POST">
+                <textarea name="content" id="" cols="30" rows="3" placeholder="Type Here" required></textarea>
+                <input type="submit" value="POST">
+            </form>
+        
+        
+            <div id="posts-list-container">
+        
+        
+                <ul>
+                        <% for(post of posts) { %>
                         
-                    <% } %>
-    
-            </ul>
-    
-        </div>
+                            <%- include('_post') -%>
+                            
+                        <% } %>
+        
+                </ul>
+        
+            </div>
     </section>
     
     <section id="user-friends">
